@@ -1,0 +1,106 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+const int max_tasks = 50;
+
+struct Task {
+    string description;
+    bool isCompleted;
+};
+
+void addTask(Task task[], int &numtasks) {
+    if (numtasks < max_tasks) {
+        cout << "Enter Task Description: ";
+        cin.ignore();
+        getline(cin, task[numtasks].description);
+        task[numtasks].isCompleted = false;
+        numtasks++;
+        cout << "Task Added."<<endl;
+    } else {
+        cout << "To-Do List is full."<<endl;
+    }
+}
+
+void displayTasks(const Task task[], int numtasks) {
+    if (numtasks == 0) {
+        cout << "No tasks to display."<<endl;
+        return;
+    }
+    cout << "Task List:\n";
+    for (int i = 0; i < numtasks; ++i) {
+        cout << i + 1 << ". " << task[i].description
+             << " [" << (task[i].isCompleted ? "Completed" : "Pending") << "]"<<endl;
+    }
+}
+
+void viewTask(const Task task[], int numtasks) {
+    if (numtasks == 0) {
+        cout << "No tasks to view."<<endl;
+        return;
+    }
+    int taskNumber;
+    cout << "Enter task number to view: ";
+    cin >> taskNumber;
+    if (taskNumber > 0 && taskNumber <= numtasks) {
+        cout << "Task " << taskNumber << ": " << task[taskNumber - 1].description
+             << " [" << (task[taskNumber - 1].isCompleted ? "Completed" : "Pending") << "]"<<endl;
+    } else {
+        cout << "Invalid task number."<<endl;
+    }
+}
+
+void markTaskAsCompleted(Task task[], int numtasks) {
+    if (numtasks == 0) {
+        cout << "No tasks to mark as completed."<<endl;
+        return;
+    }
+    int taskNumber;
+    cout << "Enter task number to mark as completed: ";
+    cin >> taskNumber;
+    if (taskNumber > 0 && taskNumber <= numtasks) {
+        task[taskNumber - 1].isCompleted = true;
+        cout << "Task marked as completed."<<endl;
+    } else {
+        cout << "Invalid task number."<<endl;
+    }
+}
+
+int main() {
+    Task task[max_tasks];
+    int numtasks = 0;
+
+    while (true) {
+        cout << "\nTo-Do List Application"<<endl;
+        cout << "1. Add Task"<<endl;
+        cout << "2. Display Tasks"<<endl;;
+        cout << "3. View Task"<<endl;
+        cout << "4. Mark Task as Done"<<endl;
+        cout << "5. Exit"<<endl;
+
+        cout<<"Enter Your Choice : "; 
+        int choice;
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                addTask(task, numtasks);
+                break;
+            case 2:
+                displayTasks(task, numtasks);
+                break;
+            case 3:
+                viewTask(task, numtasks);
+                break;
+            case 4:
+                markTaskAsCompleted(task, numtasks);
+                break;
+            case 5:
+                cout << "Exiting..."<<endl;
+                return 0;
+            default:
+                cout << "Invalid choice. Please try again."<<endl;
+        }
+    }
+
+    return 0;
+}
