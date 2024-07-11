@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+
+    srand(time(0));
+
+    int RandomNumber=rand()%100+1;
+
+    int PlayerGuess=0;
+
+    cout << "Welcome to the Number Guessing Game!" << endl;
+    cout << "I have picked a number between 1 and 100. Can you guess it?" << endl;
+
+    while(true){
+        cout<<"Enter your Guess : ";
+        cin>>PlayerGuess;
+
+        if(PlayerGuess>RandomNumber){
+            cout<<"PlayerGuess number is too High."<<endl;
+        }
+        else if(PlayerGuess<RandomNumber){
+            cout<<"PlayerGuess number is too Low."<<endl;
+        }
+        else{
+            cout<<"Congralution! You have guess the correct number : "<< RandomNumber<<endl;
+            break;
+        }
+
+    }
+    return 0;
+}
